@@ -14,14 +14,13 @@ namespace ariel {
     private:
         Player& p1;
         Player& p2;
-        Card* p1_c;
-        Card* p2_c;
         //string turns[26];
-        vector<pair<Card*,Card*> > turns;
+        vector<pair<Card,Card> > turns;
         int draw;
         int numOfTurns;
         int turnStart;
         int turnEnd;
+        int index;
 
     public:
         //Game();
@@ -42,21 +41,11 @@ namespace ariel {
 
         void shuffleCards();
 
-        Card* getP1Card();
+        int play(Card card1, Card card2);
 
-        void setP1Card(Card* card);
+        void ChecksPrintTurn(Card p1c, Card p2c);
 
-        Card* getP2Card();
-
-        void setP2Card(Card* card);
-
-//        string getWinner();
-//
-//        void setWinner(string p);
-
-        int play();
-
-        void ChecksPrintTurn(Card* p1c, Card* p2c);
+        vector<pair<Card,Card> > getVector();
     };
 }
 

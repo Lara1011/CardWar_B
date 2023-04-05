@@ -65,7 +65,7 @@ namespace ariel {
     Card* Player::getCard() {
         if(stacksize() > 0) {
             decreaseCards();
-            return &cards[index++];
+            return cards;
         }
         else
             throw runtime_error("Stack is empty !");
