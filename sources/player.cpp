@@ -19,6 +19,7 @@ namespace ariel {
         Player::cardsWon = 0;
         Player::winRate = 0.0;
         Player::index = 0;
+        Player::winTimes = 0;
     }
 
     string Player::getName() {

@@ -18,10 +18,10 @@ namespace ariel {
     //Game::Game(): p1(Player("player1")), p2(Player("player2"));
 
     Game::Game(Player& player1, Player& player2): p1(player1), p2(player2) {
-        if(player1.getName().empty() || player2.getName().empty())
-            throw invalid_argument("At least one of the players has no name !");
-        if(player1.getName() == player2.getName())
-            throw invalid_argument("There is only one player !");
+//        if(player1.getName().empty() || player2.getName().empty())
+//            throw invalid_argument("At least one of the players has no name !");
+//        if(player1.getName() == player2.getName())
+//            throw invalid_argument("There is only one player !");
         this->p1 = player1;
         this->p2 = player2;
         p1.setCardsStack(26);
@@ -42,28 +42,25 @@ namespace ariel {
             throw invalid_argument("At least one of the players has no name !");
         else if(p1.getName() == p2.getName())
             throw invalid_argument("There is only one player !");
-        else if(p1.stacksize() > 0 && p2.stacksize() > 0) {
-            Card* card1 = p1.getCard();
-            Card* card2 = p2.getCard();
-            cout << card1->getValue() << ", " << card2->getValue() << "\n";
-            setP1Card(card1);
-            setP2Card(card2);
+        else if(p1.stacksize() > 0 && p2.stacksize() > 0 && numOfTurns < 26) {
+            cout<<"stack size : "<<p1.stacksize()<<", "<<p2.stacksize()<<"\n";
+            setP1Card(p1.getCard());
+            setP2Card(p2.getCard());
             int win = 0;
             turnStart = turnEnd;
             turnEnd++;
             win = play();
             if (win == 0) {
                 int num = 0;
-                while (p1.stacksize() > 1 && p2.stacksize() > 1 && win == 0) {
+                while (p1.stacksize() > 1 && p2.stacksize() > 1 && win == 0 && numOfTurns<26) {
+                    cout<<"stack size : "<<p1.stacksize()<<", "<<p2.stacksize()<<"\n";
                     draw++;
                     turnEnd++;
                     num += 4;
-                    card1 = p1.getCard();
-                    card2 = p2.getCard();
-                    card1 = p1.getCard();
-                    card2 = p2.getCard();
-                    setP1Card(card1);
-                    setP2Card(card2);
+                    p1.getCard();
+                    p2.getCard();
+                    setP1Card(p1.getCard());
+                    setP2Card(p2.getCard());
                     win = play();
                 }
                 if (win == 1) {
@@ -74,8 +71,13 @@ namespace ariel {
                 }
             }
             numOfTurns++;
-            p1.setWinRate(p1.getWinTimes()/numOfTurns);
-            p2.setWinRate(p2.getWinTimes()/numOfTurns);
+            cout << p1.getWinTimes()<< ", " << numOfTurns << "\n";
+            p1.setWinRate(static_cast<double>(p1.getWinTimes())/numOfTurns);
+            p2.setWinRate(static_cast<double>(p2.getWinTimes())/numOfTurns);
+            if(win == 0){
+                Game game(p1, p2);
+                game.playAll();
+            }
         }
         else
             throw invalid_argument("There is no cards left !");
@@ -263,17 +265,16 @@ namespace ariel {
     }
 
     void Game::printStats() {
-        cout << p1.getName() << ": ";
-        cout << "Cards won: " << p1.cardesTaken();
-        cout << "Win rate: " << p1.getWinRate();
+        cout << p1.getName() << ": \n";
+        cout << "  Cards won: " << p1.cardesTaken() << "\n";
+        cout << "  Win rate: " << p1.getWinRate() << "\n";
 
-        cout << p2.getName() << ": ";
-        cout << "Cards won: " << p2.cardesTaken();
-        cout << "Win rate: " << p2.getWinRate();
+        cout << p2.getName() << ": \n";
+        cout << "  Cards won: " << p2.cardesTaken() << "\n";
+        cout << "  Win rate: " << p2.getWinRate() << "\n";
 
-        cout << "";
-        cout << "Number of draws: " << draw;
-        cout << "Draw rate: " << draw/numOfTurns;
+        cout << "Number of draws: " << draw << "\n";
+        cout << "Draw rate: " << static_cast<double>(draw)/static_cast<double>(numOfTurns) << "\n";
     }
 
     void Game::printWiner() {
@@ -282,7 +283,7 @@ namespace ariel {
         if(p2.cardesTaken() > p1.cardesTaken())
             cout << "The winner is: " << p2.getName();
         else
-            cout << "Draw !";
+            throw invalid_argument("Draw !");
     }
 
     Card* Game::getP1Card() {
@@ -333,13 +334,13 @@ namespace ariel {
         }
         p1.setCards(p1_cards);
         p2.setCards(p2_cards);
-//        for(int i=0; i<26; i++){
-//            cout << i << ": " << p1.getCards()[i].getValue() << ", " << p1.getCards()[i].getSuit() << "\n";
-//        }
-//        cout << "\n";
-//        for(int i=0; i<26; i++){
-//            cout << i << ": "<< p2.getCards()[i].getValue() << ", "  << p2.getCards()[i].getSuit() << "\n";
-//        }
+        for(int i=0; i<26; i++){
+            cout << i << ": " << p1.getCards()[i].getValue() << ", " << p1.getCards()[i].getSuit() << "\n";
+        }
+        cout << "\n";
+        for(int i=0; i<26; i++){
+            cout << i << ": "<< p2.getCards()[i].getValue() << ", "  << p2.getCards()[i].getSuit() << "\n";
+        }
 //        cout << "getCard: \n";
 //        for(int i=0; i<26; i++){
 //            Card* card = p1.getCard();
