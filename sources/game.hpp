@@ -44,15 +44,15 @@ namespace ariel {
 
         Card* getP1Card();
 
-        void setP1Card(Card* c);
+        void setP1Card(Card* card);
 
         Card* getP2Card();
 
-        void setP2Card(Card* c);
+        void setP2Card(Card* card);
 
-        string getWinner();
-
-        void setWinner(string p);
+//        string getWinner();
+//
+//        void setWinner(string p);
 
         int play();
 

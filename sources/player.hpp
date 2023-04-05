@@ -40,7 +40,7 @@ namespace ariel {
 
         void decreaseCards();
 
-        void setCards(Card c[]);
+        void setCards(Card* cards);
 
         Card* getCard();
 

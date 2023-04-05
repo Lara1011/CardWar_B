@@ -54,8 +54,8 @@ namespace ariel {
         this->cardsLeft--;
     }
 
-    void Player::setCards(Card *c) {
-        this->cards = c;
+    void Player::setCards(Card *cards) {
+        this->cards = cards;
     }
 
     Card *Player::getCards() {

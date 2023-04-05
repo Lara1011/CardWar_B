@@ -30,7 +30,7 @@ namespace ariel{
         return this->suit;
     }
 
-    void Card::setSuit(string s) {
-        this->suit = s;
+    void Card::setSuit(string str) {
+        this->suit = str;
     }
 }

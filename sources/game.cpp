@@ -140,127 +140,127 @@ namespace ariel {
     }
 
     void Game::ChecksPrintTurn(Card* p1c, Card* p2c) {
-        if(p1c->getValue() == 1){
-            if(p2c->getValue() == 1)
+        int value1 = p1c->getValue();
+        int value2 = p2c->getValue();
+        if(value1 == 1){
+            if(value2 == 1)
                 cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". Draw. ";
-            if(p2c->getValue() == 2)
-                cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-            if(p2c->getValue() < 11 && p2c->getValue() > 2)
-                cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-            if(p2c->getValue() == 11)
+            if(value2 == 2)
+                cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+            if(value2 < 11 && value2 > 2)
+                cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+            if(value2 == 11)
                 cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-            if(p2c->getValue() == 12)
+            if(value2 == 12)
                 cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-            if(p2c->getValue() == 13)
+            if(value2 == 13)
                 cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
         }
-        else if(p2c->getValue() == 1){
-            if(p1c->getValue() == 1)
-                cout << p1.getName() << " played Ace of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". Draw. ";
-            if(p1c->getValue() == 2)
-                cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-            if(p1c->getValue() < 11 && p1c->getValue() > 2)
-                cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-            if(p1c->getValue() == 11)
+        else if(value2 == 1){
+            if(value1 == 2)
+                cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+            if(value1 < 11 && value1 > 2)
+                cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+            if(value1 == 11)
                 cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-            if(p1c->getValue() == 12)
+            if(value1 == 12)
                 cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-            if(p1c->getValue() == 13)
+            if(value1 == 13)
                 cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played Ace of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
         }
-        else if(p1c->getValue() > p2c->getValue() || p1c->getValue() == p2c->getValue()){
-            if(p1c->getValue() == 11){
-                if(p2c->getValue() == 11)
+        else if(value1 > value2 || value1 == value2){
+            if(value1 == 11){
+                if(value2 == 11)
                     cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". Draw. ";
                 else
-                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
             }
-            else if(p1c->getValue() == 12){
-                if(p2c->getValue() == 11)
+            else if(value1 == 12){
+                if(value2 == 11)
                     cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-                else if(p2c->getValue() == 12)
+                else if(value2 == 12)
                     cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". Draw. ";
                 else
-                    cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+                    cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
             }
-            else if(p1c->getValue() == 13){
-                if(p2c->getValue() == 11)
+            else if(value1 == 13){
+                if(value2 == 11)
                     cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-                else if(p2c->getValue() == 12)
+                else if(value2 == 12)
                     cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-                else if(p2c->getValue() == 13)
+                else if(value2 == 13)
                     cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". Draw. ";
                 else
-                    cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+                    cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
             }
-            else if(p2c->getValue() == 11){
-                if(p1c->getValue() == 11)
-                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". Draw. ";
-                else if(p1c->getValue() == 12)
-                    cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-                else if(p1c->getValue() == 13)
-                    cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
-            }
-            else if(p2c->getValue() == 12){
-                if(p1c->getValue() == 12)
+//            else if(value2 == 11){
+//                if(value1 == 11)
+//                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". Draw. ";
+//                else if(value1 == 12)
+//                    cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+//                else if(value1 == 13)
+//                    cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+//            }
+            else if(value2 == 12){
+                if(value1 == 12)
                     cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". Draw. ";
                 else
                     cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
             }
-            else if(p2c->getValue() == 13){
+            else if(value2 == 13){
                 cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". Draw. ";
             }
-            else if(p1c->getValue() != p2c->getValue())
-                cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
+            else if(value1 != value2)
+                cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". " << p1.getName() << " wins.\n";
             else
-                cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". Draw. ";
+                cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". Draw. ";
         }
-        else if(p1c->getValue() <= p2c->getValue()){
-            if(p2c->getValue() == 11){
-                if(p1c->getValue() == 11)
+        else if(value1 <= value2){
+            if(value2 == 11){
+                if(value1 == 11)
                     cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". Draw. ";
                 else
-                    cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+                    cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
             }
-            else if(p2c->getValue() == 12){
-                if(p1c->getValue() == 11)
+            else if(value2 == 12){
+                if(value1 == 11)
                     cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-                else if(p1c->getValue() == 12)
+                else if(value1 == 12)
                     cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". Draw. ";
                 else
-                    cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+                    cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
             }
-            else if(p2c->getValue() == 13){
-                if(p1c->getValue() == 11)
+            else if(value2 == 13){
+                if(value1 == 11)
                     cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-                else if(p1c->getValue() == 12)
+                else if(value1 == 12)
                     cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-                else if(p1c->getValue() == 13)
+                else if(value1 == 13)
                     cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". Draw. ";
                 else
-                    cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+                    cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
             }
-            else if(p1c->getValue() == 11){
-                if(p2c->getValue() == 11)
-                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". Draw. ";
-                else if(p2c->getValue() == 12)
-                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-                else if(p2c->getValue() == 13)
-                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
-            }
-            else if(p1c->getValue() == 12){
-                if(p2c->getValue() == 12)
+//            else if(value1 == 11){
+//                if(value2 == 11)
+//                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Jack of " << p2c->getSuit() << ". Draw. ";
+//                else if(value2 == 12)
+//                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+//                else if(value2 == 13)
+//                    cout << p1.getName() << " played Jack of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+//            }
+            else if(value1 == 12){
+                if(value2 == 12)
                     cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played Queen of " << p2c->getSuit() << ". Draw. ";
                 else
                     cout << p1.getName() << " played Queen of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
             }
-            else if(p1c->getValue() == 13){
+            else if(value1 == 13){
                 cout << p1.getName() << " played King of " << p1c->getSuit() << " " << p2.getName() << " played King of " << p2c->getSuit() << ". Draw. ";
             }
-            else if(p1c->getValue() != p2c->getValue())
-                cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
+            else if(value1 != value2)
+                cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". " << p2.getName() << " wins.\n";
             else
-                cout << p1.getName() << " played " << p1c->getValue() << " of " << p1c->getSuit() << " " << p2.getName() << " played " << p2c->getValue() << " of " << p2c->getSuit() << ". Draw. ";
+                cout << p1.getName() << " played " << value1 << " of " << p1c->getSuit() << " " << p2.getName() << " played " << value2 << " of " << p2c->getSuit() << ". Draw. ";
         }
     }
 
@@ -290,16 +290,16 @@ namespace ariel {
         return this->p1_c;
     }
 
-    void Game::setP1Card(Card* c) {
-        this->p1_c = c;
+    void Game::setP1Card(Card* card) {
+        this->p1_c = card;
     }
 
     Card* Game::getP2Card() {
         return this->p2_c;
     }
 
-    void Game::setP2Card(Card* c) {
-        this->p2_c = c;
+    void Game::setP2Card(Card* card) {
+        this->p2_c = card;
     }
 
 //    string Game::getWinner() {

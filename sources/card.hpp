@@ -23,7 +23,7 @@ namespace ariel {
 
         string getSuit();
 
-        void setSuit(string s);
+        void setSuit(string str);
     };
 }
 
