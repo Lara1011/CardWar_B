@@ -17,7 +17,7 @@ namespace ariel {
         double winRate;
         Card *cards;
         int winTimes;
-        int index;
+        //int index;
 
     public:
         //Player() {};

@@ -20,14 +20,16 @@ namespace ariel {
     Game::Game(Player& player1, Player& player2): p1(player1), p2(player2) {
         this->p1 = player1;
         this->p2 = player2;
-        p1.setCardsStack(26);
-        p2.setCardsStack(26);
+        this->p1.setCardsStack(26);
+        this->p2.setCardsStack(26);
         shuffleCards();
-        turnStart = 0;
-        turnEnd = 0;
-        index=0;
-        draw = 0;
-        numOfTurns = 0;
+        this->turnStart = 0;
+        this->turnEnd = 0;
+        this->index=0;
+        this->numOfTurns = 0;
+        this->draw = 0;
+        this->turns.clear();
+
     }
 
     void Game::playAll() {
@@ -41,6 +43,7 @@ namespace ariel {
             throw invalid_argument("At least one of the players has no name !");
         else if(p1.getName() == p2.getName())
             throw invalid_argument("There is only one player !");
+
         else if(p1.stacksize() > 0 && p2.stacksize() > 0 && numOfTurns < 26) {
             //cout<<"stack size : "<<p1.stacksize()<<", "<<p2.stacksize()<<"\n";
             Card card1 = p1.getCard()[index];
@@ -50,6 +53,8 @@ namespace ariel {
             turnEnd++;
             win = play(card1, card2);
             index++;
+            p1.decreaseCards();
+            p2.decreaseCards();
             if (win == 0) {
                 int num = 0;
                 while (p1.stacksize() > 1 && p2.stacksize() > 1 && win == 0 && numOfTurns<26) {
@@ -59,10 +64,14 @@ namespace ariel {
                     card1 = p1.getCard()[index];
                     card2 = p2.getCard()[index];
                     index++;
+                    p1.decreaseCards();
+                    p2.decreaseCards();
                     card1 = p1.getCard()[index];
                     card2 = p2.getCard()[index];
                     win = play(card1, card2);
                     index++;
+                    p1.decreaseCards();
+                    p2.decreaseCards();
                 }
                 if (win == 1) {
                     p1.updateCards(num);
@@ -88,7 +97,16 @@ namespace ariel {
 //        cout << p1.stacksize() << ", " << p2.stacksize()<<"\n";
         int value1 = card1.getValue();
         int value2 = card2.getValue();
-        cout << value1 << ", " << value2 << "\n";
+        cout <<  p1.getCard()[index].getValue();
+        cout << "," ;
+        cout <<  p2.getCard()[index].getValue();
+        cout << "," ;
+        cout << "numOfTurns: " << this->numOfTurns;
+        cout << "," ;
+        cout << "Stack 1: " << this->p1.stacksize();
+        cout << "," ;
+        cout << "Stack 2: " << this->p2.stacksize();
+        cout << "\n";
         turns.push_back(make_pair(card1, card2));
         if(value1 == 1 && value2 > 2){
             p1.updateCards(2);
@@ -127,18 +145,25 @@ namespace ariel {
     }
 
     void Game::printLastTurn() {
-        for(size_t i = static_cast<size_t>(turnStart); i < turnEnd; i++){
-            Card p1c = turns[i].first;
-            Card p2c = turns[i].second;
-            ChecksPrintTurn(p1c, p2c);
+/*        for(size_t i = static_cast<size_t>(turnStart); i < turnEnd; i++){
+//            Card* p1c = turns[i].first;
+//            Card* p2c = turns[i].second;*/
+        for (auto it = turns.begin() + turnStart; it != turns.begin() + turnEnd; ++it) {
+            Card card1 = it->first;
+            Card card2 = it->second;
+            ChecksPrintTurn(card1, card2);
         }
     }
 
     void Game::printLog() {
-        for(std::vector<std::pair<ariel::Card, ariel::Card> >::size_type i = 0; i < turnEnd; i++){
-            Card p1c = turns[i].first;
-            Card p2c = turns[i].second;
-            ChecksPrintTurn(p1c, p2c);
+        //for(std::vector<std::pair<ariel::Card, ariel::Card> >::size_type i = 0; i < turnEnd; i++){
+//            Card* p1c = turns[i].first;
+//            Card* p2c = turns[i].second;
+        for (auto it = turns.begin(); it != turns.begin() + turnEnd; ++it) {
+            Card card1 = it->first;
+            Card card2 = it->second;
+            ChecksPrintTurn(card1, card2);
+/*            ChecksPrintTurn(turns[i].first, turns[i].second);*/
         }
     }
 
@@ -293,12 +318,12 @@ namespace ariel {
 
     void Game::shuffleCards() {
         Card deck[52];
-        int index = 0;
+        int t = 0;
         for (int i=1; i<=13; i++){
-            deck[index++] = Card(i, "Diamonds");
-            deck[index++] = Card(i, "Hearts");
-            deck[index++] = Card(i, "Clubs");
-            deck[index++] = Card(i, "Spades");
+            deck[t++] = Card(i, "Diamonds");
+            deck[t++] = Card(i, "Hearts");
+            deck[t++] = Card(i, "Clubs");
+            deck[t++] = Card(i, "Spades");
         }
         int i_p1 = 0, i_p2 = 0;
         Card p1_cards[26];
@@ -316,12 +341,13 @@ namespace ariel {
         p1.setCards(p1_cards);
         p2.setCards(p2_cards);
         for(int i=0; i<26; i++){
-            cout << i << ": " << p1.getCards()[i].getValue() << ", " << p1.getCards()[i].getSuit() << "\n";
+            cout  << p1.getCards()[i].getValue() << ", " << p2.getCards()[i].getValue() << "\t";
         }
         cout << "\n";
-        for(int i=0; i<26; i++){
-            cout << i << ": "<< p2.getCards()[i].getValue() << ", "  << p2.getCards()[i].getSuit() << "\n";
-        }
+        cout << "\n";
+//        for(int i=0; i<26; i++){
+//            cout << i << ": "<< p2.getCards()[i].getValue() << ", "  << p2.getCards()[i].getSuit() << "\n";
+//        }
 //        cout << "getCard: \n";
 //        for(int i=0; i<26; i++){
 //            Card* card = p1.getCard();

@@ -5,6 +5,7 @@
 #include "player.hpp"
 #include <string>
 #include <iostream>
+
 using namespace std;
 
 namespace ariel {
@@ -14,12 +15,13 @@ namespace ariel {
 //    }
 
     Player::Player(string name) {
-        Player::name = name;
-        Player::cardsLeft = 0;
-        Player::cardsWon = 0;
-        Player::winRate = 0.0;
-        Player::index = 0;
-        Player::winTimes = 0;
+        this->name = name;
+        this->cardsLeft = 0;
+        this->cardsWon = 0;
+        this->winRate = 0.0;
+        //   this->::index = 0;
+        this->winTimes = 0;
+        this->cards = nullptr;
     }
 
     string Player::getName() {
@@ -62,13 +64,12 @@ namespace ariel {
         return this->cards;
     }
 
-    Card* Player::getCard() {
-        if(stacksize() > 0) {
-            decreaseCards();
-            return cards;
-        }
-        else
+    Card *Player::getCard() {
+        if (stacksize() < 0) {
             throw runtime_error("Stack is empty !");
+        } else
+            return cards;
+
     }
 
     void Player::setCardsStack(int size) {
@@ -79,7 +80,7 @@ namespace ariel {
         this->winTimes++;
     }
 
-    int Player::getWinTimes(){
+    int Player::getWinTimes() {
         return this->winTimes;
     }
 }
