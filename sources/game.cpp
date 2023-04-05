@@ -26,6 +26,8 @@ namespace ariel {
         turnStart = 0;
         turnEnd = 0;
         index=0;
+        draw = 0;
+        numOfTurns = 0;
     }
 
     void Game::playAll() {
@@ -283,7 +285,7 @@ namespace ariel {
     void Game::printWiner() {
         if(p1.cardesTaken() > p2.cardesTaken())
             cout << "The winner is: " << p1.getName();
-        if(p2.cardesTaken() > p1.cardesTaken())
+        else if(p2.cardesTaken() > p1.cardesTaken())
             cout << "The winner is: " << p2.getName();
         else
             throw invalid_argument("Draw !");
