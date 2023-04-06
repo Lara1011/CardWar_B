@@ -15,7 +15,6 @@
 using namespace std;
 
 namespace ariel {
-    //Game::Game(): p1(Player("player1")), p2(Player("player2"));
 
     Game::Game(Player& player1, Player& player2): p1(player1), p2(player2) {
         this->p1 = player1;
@@ -43,9 +42,7 @@ namespace ariel {
             throw invalid_argument("At least one of the players has no name !");
         else if(p1.getName() == p2.getName())
             throw invalid_argument("There is only one player !");
-
         else if(p1.stacksize() > 0 && p2.stacksize() > 0 && numOfTurns < 26) {
-            //cout<<"stack size : "<<p1.stacksize()<<", "<<p2.stacksize()<<"\n";
             Card card1 = p1.getCard()[index];
             Card card2 = p2.getCard()[index];
             int win = 0;
@@ -81,7 +78,6 @@ namespace ariel {
                 }
             }
             numOfTurns++;
-            //cout << p1.getWinTimes()<< ", " << numOfTurns << "\n";
             p1.setWinRate(static_cast<double>(p1.getWinTimes())/numOfTurns);
             p2.setWinRate(static_cast<double>(p2.getWinTimes())/numOfTurns);
             if(win == 0){
@@ -94,19 +90,8 @@ namespace ariel {
     }
 
     int Game::play(Card card1, Card card2){
-//        cout << p1.stacksize() << ", " << p2.stacksize()<<"\n";
         int value1 = card1.getValue();
         int value2 = card2.getValue();
-        cout <<  p1.getCard()[index].getValue();
-        cout << "," ;
-        cout <<  p2.getCard()[index].getValue();
-        cout << "," ;
-        cout << "numOfTurns: " << this->numOfTurns;
-        cout << "," ;
-        cout << "Stack 1: " << this->p1.stacksize();
-        cout << "," ;
-        cout << "Stack 2: " << this->p2.stacksize();
-        cout << "\n";
         turns.push_back(make_pair(card1, card2));
         if(value1 == 1 && value2 > 2){
             p1.updateCards(2);
@@ -145,9 +130,6 @@ namespace ariel {
     }
 
     void Game::printLastTurn() {
-/*        for(size_t i = static_cast<size_t>(turnStart); i < turnEnd; i++){
-//            Card* p1c = turns[i].first;
-//            Card* p2c = turns[i].second;*/
         for (auto it = turns.begin() + turnStart; it != turns.begin() + turnEnd; ++it) {
             Card card1 = it->first;
             Card card2 = it->second;
@@ -156,14 +138,10 @@ namespace ariel {
     }
 
     void Game::printLog() {
-        //for(std::vector<std::pair<ariel::Card, ariel::Card> >::size_type i = 0; i < turnEnd; i++){
-//            Card* p1c = turns[i].first;
-//            Card* p2c = turns[i].second;
         for (auto it = turns.begin(); it != turns.begin() + turnEnd; ++it) {
             Card card1 = it->first;
             Card card2 = it->second;
             ChecksPrintTurn(card1, card2);
-/*            ChecksPrintTurn(turns[i].first, turns[i].second);*/
         }
     }
 
@@ -223,14 +201,6 @@ namespace ariel {
                 else
                     cout << p1.getName() << " played King of " << suit1 << " " << p2.getName() << " played " << value2 << " of " << suit2 << ". " << p1.getName() << " wins.\n";
             }
-//            else if(value2 == 11){
-//                if(value1 == 11)
-//                    cout << p1.getName() << " played Jack of " << suit1 << " " << p2.getName() << " played Jack of " << suit2 << ". Draw. ";
-//                else if(value1 == 12)
-//                    cout << p1.getName() << " played Queen of " << suit1 << " " << p2.getName() << " played Jack of " << suit2 << ". " << p1.getName() << " wins.\n";
-//                else if(value1 == 13)
-//                    cout << p1.getName() << " played King of " << suit1 << " " << p2.getName() << " played Jack of " << suit2 << ". " << p1.getName() << " wins.\n";
-//            }
             else if(value2 == 12){
                 if(value1 == 12)
                     cout << p1.getName() << " played Queen of " << suit1 << " " << p2.getName() << " played Queen of " << suit2 << ". Draw. ";
@@ -270,14 +240,6 @@ namespace ariel {
                 else
                     cout << p1.getName() << " played " << value1 << " of " << suit1 << " " << p2.getName() << " played King of " << suit2 << ". " << p2.getName() << " wins.\n";
             }
-//            else if(value1 == 11){
-//                if(value2 == 11)
-//                    cout << p1.getName() << " played Jack of " << suit1 << " " << p2.getName() << " played Jack of " << suit2 << ". Draw. ";
-//                else if(value2 == 12)
-//                    cout << p1.getName() << " played Jack of " << suit1 << " " << p2.getName() << " played Queen of " << suit2 << ". " << p2.getName() << " wins.\n";
-//                else if(value2 == 13)
-//                    cout << p1.getName() << " played Jack of " << suit1 << " " << p2.getName() << " played King of " << suit2 << ". " << p2.getName() << " wins.\n";
-//            }
             else if(value1 == 12){
                 if(value2 == 12)
                     cout << p1.getName() << " played Queen of " << suit1 << " " << p2.getName() << " played Queen of " << suit2 << ". Draw. ";
@@ -328,8 +290,6 @@ namespace ariel {
         int i_p1 = 0, i_p2 = 0;
         Card p1_cards[26];
         Card p2_cards[26];
-        //random_shuffle(begin(deck), end(deck));
-        //shuffle(begin(deck), end(deck), default_random_engine());
         unsigned seed = chrono::system_clock::now().time_since_epoch().count();
         shuffle(begin(deck), end(deck), default_random_engine(seed));
         for(int i=0; i<52; i++){
@@ -340,24 +300,6 @@ namespace ariel {
         }
         p1.setCards(p1_cards);
         p2.setCards(p2_cards);
-        for(int i=0; i<26; i++){
-            cout  << p1.getCards()[i].getValue() << ", " << p2.getCards()[i].getValue() << "\t";
-        }
-        cout << "\n";
-        cout << "\n";
-//        for(int i=0; i<26; i++){
-//            cout << i << ": "<< p2.getCards()[i].getValue() << ", "  << p2.getCards()[i].getSuit() << "\n";
-//        }
-//        cout << "getCard: \n";
-//        for(int i=0; i<26; i++){
-//            Card* card = p1.getCard();
-//            cout << i << ": " << card->getValue() << ", of " << card->getSuit() << "\n";
-//        }
-//        cout << "\n";
-//        for(int i=0; i<26; i++){
-//            Card* card = p2.getCard();
-//            cout << i << ": "<< card->getValue() << ", of "  << card->getSuit() << "\n";
-//        }
     }
 
     vector<pair<Card, Card> > Game::getVector() {

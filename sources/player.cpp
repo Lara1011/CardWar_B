@@ -9,17 +9,11 @@
 using namespace std;
 
 namespace ariel {
-//    Player::Player() {
-//        Player::cardsLeft = 26;
-//        Player::cardsWon = 0;
-//    }
-
     Player::Player(string name) {
         this->name = name;
         this->cardsLeft = 0;
         this->cardsWon = 0;
         this->winRate = 0.0;
-        //   this->::index = 0;
         this->winTimes = 0;
         this->cards = nullptr;
     }

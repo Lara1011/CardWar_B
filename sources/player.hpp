@@ -17,11 +17,8 @@ namespace ariel {
         double winRate;
         Card *cards;
         int winTimes;
-        //int index;
 
     public:
-        //Player() {};
-
         Player(string name);
 
         string getName();

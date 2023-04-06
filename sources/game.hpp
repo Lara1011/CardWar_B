@@ -14,7 +14,6 @@ namespace ariel {
     private:
         Player& p1;
         Player& p2;
-        //string turns[26];
         vector<pair<Card,Card> > turns;
         int draw;
         int numOfTurns;
@@ -23,8 +22,6 @@ namespace ariel {
         int index;
 
     public:
-        //Game();
-
         Game(Player& player1, Player& player2);
 
         void playTurn();
