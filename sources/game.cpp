@@ -275,7 +275,7 @@ namespace ariel {
         else if (p2.cardesTaken() > p1.cardesTaken())
             cout << "The winner is: " << p2.getName() << "\n";
         else
-            return;
+            cout << "Draw ! Should throw an exception ! \n";
         //throw invalid_argument("Draw !");
     }
 
