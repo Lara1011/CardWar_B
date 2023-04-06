@@ -1,6 +1,6 @@
 #!make -f
 
-CXX=clang++
+CXX=clang++-14
 CXXVERSION=c++2a
 SOURCE_PATH=sources
 OBJECT_PATH=objects
@@ -14,7 +14,7 @@ OBJECTS=$(subst sources/,objects/,$(subst .cpp,.o,$(SOURCES)))
 
 run: test1
 
-demo: Demo.o $(OBJECTS) 
+demo: Demo.o $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
 test1: TestRunner.o StudentTest1.o  $(OBJECTS)
