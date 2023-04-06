@@ -76,14 +76,14 @@ namespace ariel {
                 if (win == 2) {
                     p2.updateCards(num);
                 }
+                if(win == 0){
+                        p1.updateCards(num / 2 + 1);
+                        p2.updateCards(num / 2 + 1);
+                }
             }
             numOfTurns++;
             p1.setWinRate(static_cast<double>(p1.getWinTimes())/numOfTurns);
             p2.setWinRate(static_cast<double>(p2.getWinTimes())/numOfTurns);
-            if(win == 0){
-                Game game(p1, p2);
-                game.playAll();
-            }
         }
         else
             throw invalid_argument("There is no cards left !");
@@ -270,13 +270,15 @@ namespace ariel {
     }
 
     void Game::printWiner() {
-        if(p1.cardesTaken() > p2.cardesTaken())
-            cout << "The winner is: " << p1.getName();
-        else if(p2.cardesTaken() > p1.cardesTaken())
-            cout << "The winner is: " << p2.getName();
+        if (p1.cardesTaken() > p2.cardesTaken())
+            cout << "The winner is: " << p1.getName() << "\n";
+        else if (p2.cardesTaken() > p1.cardesTaken())
+            cout << "The winner is: " << p2.getName() << "\n";
         else
-            throw invalid_argument("Draw !");
+            return;
+        //throw invalid_argument("Draw !");
     }
+
 
     void Game::shuffleCards() {
         Card deck[52];
