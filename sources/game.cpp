@@ -77,8 +77,16 @@ namespace ariel {
                     p2.updateCards(num);
                 }
                 if(win == 0){
+                    if(p1.stacksize() == 1 && p2.stacksize() == 1) {
+                        p1.updateCards(num / 2 + 2);
+                        p2.updateCards(num / 2 + 2);
+                        p1.decreaseCards();
+                        p2.decreaseCards();
+                    }
+                    else if(p1.stacksize() == 0 && p2.stacksize() == 0) {
                         p1.updateCards(num / 2 + 1);
                         p2.updateCards(num / 2 + 1);
+                    }
                 }
             }
             numOfTurns++;
