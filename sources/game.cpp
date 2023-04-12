@@ -40,7 +40,7 @@ namespace ariel {
     void Game::playTurn() {
         if(p1.getName().empty() || p2.getName().empty())
             throw invalid_argument("At least one of the players has no name !");
-        else if(p1.getName() == p2.getName())
+        else if(&p1 == &p2)
             throw invalid_argument("There is only one player !");
         else if(p1.stacksize() > 0 && p2.stacksize() > 0 && numOfTurns < 26) {
             Card card1 = p1.getCard()[index];
